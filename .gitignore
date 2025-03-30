@@ -1,0 +1,34 @@
+# Qt Creator kullanıcı dosyaları
+*.pro.user
+*.pro.user.*
+*.qmake.stash
+*.qtc/
+
+# Derleme dosyaları
+build*/
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.a
+*.dylib
+
+# Qt'nin oluşturduğu geçici dosyalar
+*.moc/
+moc_*.cpp
+moc_*.h
+*.qrc
+ui_*.h
+qrc_*.cpp
+*.rcc
+
+# CMake ve Makefile dosyaları
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles/
+Makefile
+
+# Debug ve Release klasörleri
+Debug/
+Release/

@@ -42,7 +42,7 @@ void MainWindow::writeFile(const QString &filePath)
     QFile file(filePath);
     if (file.open(QFile::WriteOnly | QFile::Text)) {
         QTextStream out(&file);
-        out << ui->textEdit->toPlainText();
+        out << ui->textEdit->toHtml();
         ui->textEdit->document()->setModified(false);
         file.close();
     } else {
@@ -67,14 +67,14 @@ void MainWindow::on_actionOpen_triggered()
         this,
         "Open File",
         "",
-        "Text Files (*.txt);;All Files (*)"
+        "BetterNotepad Documents (*.bnpd);;HTML Files (*.html);;All Files (*)"
         );
 
     if (!filePath.isEmpty()) {
         QFile file(filePath);
         if (file.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&file);
-            ui->textEdit->setPlainText(in.readAll());
+            ui->textEdit->setHtml(in.readAll());
             file.close();
             currentFile = filePath;
             ui->textEdit->document()->setModified(false);
@@ -100,12 +100,12 @@ void MainWindow::on_actionSave_As_triggered()
         this,
         "Save File",
         "",
-        "Text Files (*.txt);;All Files (*)"
+        "BetterNotepad Documents (*.bnpd);;HTML Files (*.html);;All Files (*)"
         );
 
     if (!filePath.isEmpty()) {
-        if (!filePath.endsWith(".txt")) {
-            filePath += ".txt"; // Dosya adını .txt ile tamamla
+        if (!filePath.endsWith(".bnpd")) {
+            filePath += ".bnpd";
         }
         currentFile = filePath;
         writeFile(currentFile);
@@ -203,7 +203,7 @@ void MainWindow::openNote(const QString &filePath)
     QFile file(filePath);
     if (file.open(QFile::ReadOnly | QFile::Text)) {
         QTextStream in(&file);
-        ui->textEdit->setPlainText(in.readAll());
+        ui->textEdit->setHtml(in.readAll());
         file.close();
         currentFile = filePath;
         ui->textEdit->document()->setModified(false);

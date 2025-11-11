@@ -31,7 +31,7 @@ NoteList::~NoteList()
 
 void NoteList::on_pushButton_clicked()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, "Select Note File", "", "Text Files (*.txt);;All Files (*)");
+    QString filePath = QFileDialog::getOpenFileName(this, "Select Note File", "", "BetterNotepad Documents (*.bnpd);;All Files (*)");
     if (!filePath.isEmpty()) {
         // Yeni satır ekle
         int newRow = ui->tableWidget->rowCount();

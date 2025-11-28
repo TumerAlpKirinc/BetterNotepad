@@ -1,8 +1,11 @@
 #ifndef NOTELIST_H
 #define NOTELIST_H
 
+
 #include <QMainWindow>
 #include <QCloseEvent>
+#include <QtQuickWidgets/QtQuickWidgets>
+
 
 namespace Ui {
 class NoteList;
@@ -16,31 +19,33 @@ public:
     explicit NoteList(QWidget *parent = nullptr);
     ~NoteList();
 
+
+
 private slots:
-    void on_pushButton_clicked();
 
     void on_actionInfo_triggered();
 
     void loadNotes();
 
-    void closeEvent(QCloseEvent *event);
+    void handleCardClick(const QString &filePath);
 
-    void saveNotes();
+    void newNoteCardClicked();
 
-    void on_pushButton_2_clicked();
+    void deleteNoteCardClicked(const QString &filePath);
 
-    void on_pushButton_3_clicked();
+    void changeCardColor(const QString &filePath);
 
-    void on_pushButton_4_clicked();
-
-    void on_tableWidget_cellDoubleClicked(int row, int column);
+    void rightClicked(const QString &filePath);
 
 signals:
     void openNote(const QString &filePath);
 
 
+
 private:
     Ui::NoteList *ui;
+    QWidget *contentWidget;
+    QGridLayout *grid;
 };
 
 #endif // NOTELIST_H

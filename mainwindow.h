@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -56,6 +57,9 @@ private slots:
 
     void on_actionReturn_to_Note_List_triggered();
 
+    void setDarkMode(bool enabled);
+
+    void applySavedTheme();
 
 private:
     Ui::MainWindow *ui;

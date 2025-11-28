@@ -11,14 +11,16 @@
 #include <QInputDialog>
 #include <QPrintDialog>
 #include <QPrinter>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setCentralWidget(ui->textEdit);
+    this->setCentralWidget(ui->centralwidget);
     currentFile.clear();
+    applySavedTheme();
 
 }
 
@@ -223,4 +225,40 @@ void MainWindow::on_actionReturn_to_Note_List_triggered()
     notelist->show();
 
 }
+
+void MainWindow::setDarkMode(bool enabled)
+{
+    QPalette darkPalette;
+    if (enabled) {
+        darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+        darkPalette.setColor(QPalette::WindowText, Qt::white);
+        darkPalette.setColor(QPalette::Base, QColor(42, 42, 42));
+        darkPalette.setColor(QPalette::AlternateBase, QColor(66, 66, 66));
+        darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
+        darkPalette.setColor(QPalette::ToolTipText, Qt::white);
+        darkPalette.setColor(QPalette::Text, Qt::white);
+        darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+        darkPalette.setColor(QPalette::ButtonText, Qt::white);
+        darkPalette.setColor(QPalette::BrightText, Qt::red);
+        darkPalette.setColor(QPalette::Highlight, QColor(142, 45, 197).lighter());
+        darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+        qApp->setPalette(darkPalette);
+    } else {
+        qApp->setPalette(QPalette());
+
+    }
+
+    // Tema durumunu kaydet
+    QSettings settings("BetterNotepad", "Theme");
+    settings.setValue("darkMode", enabled);
+}
+
+void MainWindow::applySavedTheme()
+{
+    QSettings settings("BetterNotepad", "Theme");
+    bool darkEnabled = settings.value("darkMode", false).toBool();
+    setDarkMode(darkEnabled);
+}
+
+
 
